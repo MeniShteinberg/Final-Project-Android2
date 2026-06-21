@@ -1,0 +1,43 @@
+.group-container {
+    padding: 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.group-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    background-color: #f5f8fa;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+.group-photo {
+    width: 100px;
+    height: 100px;
+    border-radius: 12px;
+    object-fit: cover;
+    border: 2px solid #ccc;
+}
+
+.group-info h1 {
+    margin: 0;
+    font-size: 1.8rem;
+}
+
+.group-info p {
+    margin: 0.3rem 0;
+    color: #555;
+}
+
+.group-section-title {
+    margin-top: 2rem;
+    font-size: 1.4rem;
+    color: #333;
+}
+
+.post-form-wrapper {
+    margin: 2rem 0;
+}
