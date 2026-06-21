@@ -48,10 +48,10 @@ To run this project locally, follow these steps:
 
 2. Install dependencies
 
-Install dependencies for the root, client, and server:
+Install dependencies for the root, client, and server:  
 npm install cd client && npm install cd ../server && npm install
 
-3. Create environment variables
+3. Create environment variables  
 Create .env files for both client and server: 
 
 Include your MongoDB URI
@@ -64,10 +64,10 @@ MONGO_URI=your_mongo_uri CLOUDINARY_CLOUD_NAME=your_cloud_name CLOUDINARY_API_KE
 
 4. run the project
 
-Start the backend:
+Start the backend:  
 cd server node app.js
 
-Start the frontend:
+Start the frontend:  
 cd ../client npm run dev
 
 Visit: http://localhost:3000
