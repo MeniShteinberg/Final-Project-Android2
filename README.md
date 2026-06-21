@@ -44,15 +44,16 @@ Multer & Cloudinary for image upload
 
 To run this project locally, follow these steps:
 
-1. Clone the repository
+Clone the repository
+git clone https://github.com/RomanDubrovin777/ReactFinalProject.git cd ReactFinalProject
 
-2. Install dependencies
+Install dependencies
+Install dependencies for the root, client, and server:
 
-Install dependencies for the root, client, and server:  
 npm install cd client && npm install cd ../server && npm install
 
-3. Create environment variables  
-Create .env files for both client and server: 
+Create environment variables
+Create .env files for both client and server:
 
 Include your MongoDB URI
 
@@ -62,12 +63,15 @@ Example for server:
 
 MONGO_URI=your_mongo_uri CLOUDINARY_CLOUD_NAME=your_cloud_name CLOUDINARY_API_KEY=your_api_key CLOUDINARY_API_SECRET=your_api_secret
 
-4. run the project
+Run the project
+Start the backend:
 
-Start the backend:  
 cd server node app.js
 
-Start the frontend:  
+Start the frontend:
+
 cd ../client npm run dev
 
 Visit: http://localhost:3000
+
+Happy coding! 🎉
