@@ -110,6 +110,11 @@ export default function ChatApp() {
       <div className="chat-box">
         <div className="chat-header">
           Chat with @{otherUser?.username || '...'}
+
+          <button className="return-btn" onClick={() => window.history.back()}>
+            X
+          </button>
+
         </div>
 
         <div className="messages" ref={messagesContainerRef}>

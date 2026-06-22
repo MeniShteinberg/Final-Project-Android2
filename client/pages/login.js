@@ -35,6 +35,11 @@ export default function LoginPage() {
     }
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem("user"); 
+    window.location.href = "/"; 
+  };
+
   return (
     <div className="login-container">
       <form onSubmit={handleSubmit} className="login-form">
@@ -70,6 +75,11 @@ export default function LoginPage() {
         <button type="submit" className="login-button">
           Login
         </button>
+
+        <button type="button" className="login-Return" onClick={handleLogout}>
+          Return
+        </button>
+
       </form>
     </div>
   );

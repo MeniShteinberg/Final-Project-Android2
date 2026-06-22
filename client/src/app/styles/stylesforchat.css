@@ -82,3 +82,15 @@
 .input-area button:hover {
   background-color: #0d8de1;
 }
+
+.return-btn {
+  background-color: #fffcfc;
+  color: rgb(7, 0, 0);
+  border: none;
+  padding: 10px 10px;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  margin-left: 580px; 
+}

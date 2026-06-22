@@ -74,7 +74,13 @@ export default function GroupPage() {
             <div className="group-header">
                 <img src={group.photo?.url || '/default.png'} alt="group" className="group-photo" />
                 <div className="group-info">
-                    <h1>{group.name}</h1>
+                    <h1>{group.name}
+
+                    <button className="return-btn" onClick={() => window.history.back()}>
+                    X
+                    </button>
+
+                    </h1>
                     <p>{group.description}</p>
                     <p><strong>Category:</strong> {group.category}</p>
                     <p><strong>Members:</strong> {group.members.length}</p>
