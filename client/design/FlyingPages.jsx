@@ -5,7 +5,6 @@ import React, { useEffect, useRef } from 'react';
 import './FlyingPages.css';
 
 // Component for animated falling pages on screen edges
-// Render the animated page elements floating across the screen.
 const FlyingPages = ({ count = 6 }) => {
   // Store references to DOM elements
   const pageRefs = useRef([]);

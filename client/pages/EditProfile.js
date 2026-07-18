@@ -13,7 +13,6 @@ export default function EditProfilePage() {
   const [user, setUser] = useState(null);
   
   // Form input states
-  // Keep the editable form values in local state.
   const [name, setName] = useState('');
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
@@ -71,7 +70,6 @@ export default function EditProfilePage() {
     }
   };
 
-  // Show loading state while retrieving user
   // Display a loader until the profile data is ready.
   if (!user) return <p>Loading...</p>;
 

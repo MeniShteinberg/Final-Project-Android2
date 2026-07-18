@@ -32,7 +32,6 @@ exports.createGroup = async (req, res) => {
 };
 
 
-
 // Return all groups for discovery and browsing.
 exports.getAllGroups = async (req, res) => {
     try {
