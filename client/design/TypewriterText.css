@@ -1,0 +1,37 @@
+.typewriter-container {
+  /* Classic book font style (Serif) */
+  font-family: 'Georgia', 'Times New Roman', serif;
+  font-size: clamp(2rem, 10vw, 6rem);
+  font-weight: bold;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  user-select: none;
+  /* Smooth transition for hover color */
+  transition: color 0.3s ease;
+}
+
+.typewriter-container:hover {
+  /* Brand blue color on hover */
+  color: #000000;
+}
+
+.typewriter-cursor {
+  font-weight: 300;
+  /* Brand blue color for cursor */
+  color: #3bb9fd; 
+  margin-left: 4px;
+  /* Blinking animation */
+  animation: blink 1s step-end infinite;
+}
+
+.typewriter-cursor.typing {
+  /* Stop blinking while actively typing */
+  animation: none;
+  opacity: 1;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}

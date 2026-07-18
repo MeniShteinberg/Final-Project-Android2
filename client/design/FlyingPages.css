@@ -1,0 +1,41 @@
+
+.flying-pages-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  /* Place behind all other content */
+  z-index: -1; 
+  overflow: hidden;
+}
+
+/* Floating page element styling */
+.page-element {
+  position: absolute;
+  top: 0;
+  left: 0;
+  /* Dimensions for the page */
+  width: 45px; 
+  height: 64px;
+  /* Off-white paper color */
+  background-color: #faf9f5; 
+  /* Clean edge border */
+  border: 1px solid #e0dcd3; 
+  /* Soft drop shadow */
+  box-shadow: 1px 2px 5px rgba(0, 0, 0, 0.08); 
+  /* Faint horizontal text lines */
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent,
+    transparent 7px,
+    rgba(120, 110, 100, 0.1) 7px,
+    rgba(120, 110, 100, 0.1) 8px
+  );
+  /* Offset for top margin */
+  background-position: 0 8px; 
+  background-size: 100% 100%;
+  /* Hardware acceleration */
+  will-change: transform; 
+}
