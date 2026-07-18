@@ -11,10 +11,12 @@ const {
   getFeed
 } = require('../controllers/postController');
 
+// Create the post router.
 const router = express.Router();
 
 const postController = require('../controllers/postController');
 
+// Create a post inside a specific group.
 router.post('/:groupId/post', upload.single('photo'), postController.createGroupPost);
 
 router.post('/', upload.single('photo'), createPost);

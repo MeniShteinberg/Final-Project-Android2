@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+// Define the direct-message document structure.
 const messageSchema = new Schema(
   {
     text: {

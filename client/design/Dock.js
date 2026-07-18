@@ -1,5 +1,6 @@
 "use client";
 
+// Import the motion primitives used for the animated dock.
 import {
   motion,
   useMotionValue,
@@ -18,6 +19,7 @@ import {
 
 import "./Dock.css";
 
+// Create the interactive dock item wrapper.
 function DockItem({
   children,
   className = "",
@@ -70,6 +72,7 @@ function DockItem({
   );
 }
 
+// Manage label visibility based on hover state.
 function DockLabel({ children, className = "", ...rest }) {
   const { isHovered } = rest;
   const [isVisible, setIsVisible] = useState(false);
@@ -100,10 +103,12 @@ function DockLabel({ children, className = "", ...rest }) {
   );
 }
 
+// Render the icon content inside each dock item.
 function DockIcon({ children, className = "" }) {
   return <div className={`dock-icon ${className}`}>{children}</div>;
 }
 
+// Build the completed dock component and its hover behavior.
 export default function Dock({
   items,
   className = "",

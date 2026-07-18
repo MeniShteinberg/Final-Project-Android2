@@ -1,17 +1,21 @@
 "use client";
+// Load the post card state and API helpers.
 import { useState } from 'react';
 import axios from 'axios';
 import Link from 'next/link';
 
+// Render a single post with actions for liking, commenting, editing, and deleting.
 export default function PostCard({ post, currentUserId, onUpdate, onRefresh, isAdmin = false }) {
   if (!post || !post.postedBy) return null;
 
+  // Keep the comment box and edit state in local component state.
   const [comment, setComment] = useState('');
   const [isEditing, setIsEditing] = useState(false);
   const [editedContent, setEditedContent] = useState(post.content);
 
   const isMyPost = post.postedBy && currentUserId === post.postedBy._id;
 
+  // Send a like action to the server and refresh the card state.
   const handleLike = async () => {
     try {
       const { data } = await axios.post(
@@ -24,6 +28,7 @@ export default function PostCard({ post, currentUserId, onUpdate, onRefresh, isA
     }
   };
 
+  // Submit a new comment for the current post.
   const handleComment = async () => {
     if (!comment.trim()) return;
     try {
@@ -40,6 +45,7 @@ export default function PostCard({ post, currentUserId, onUpdate, onRefresh, isA
     }
   };
 
+  // Save an edited post body to the backend.
   const handleEdit = async () => {
     try {
       const { data } = await axios.put(
@@ -56,6 +62,7 @@ export default function PostCard({ post, currentUserId, onUpdate, onRefresh, isA
     }
   };
 
+  // Delete the post after a confirmation prompt.
   const handleDelete = async () => {
     if (!window.confirm("Are you sure you want to delete this post?")) return;
 
@@ -71,6 +78,7 @@ export default function PostCard({ post, currentUserId, onUpdate, onRefresh, isA
     }
   };
 
+  // Unfollow the post author and refresh the feed.
   const handleUnfollow = async () => {
     try {
       await axios.post('http://localhost:5000/api/users/remove-friend', {
@@ -85,6 +93,7 @@ export default function PostCard({ post, currentUserId, onUpdate, onRefresh, isA
     }
   };
 
+  // Render the post card markup and action controls.
   return (
     <div style={styles.card}>
       <div style={styles.header}>

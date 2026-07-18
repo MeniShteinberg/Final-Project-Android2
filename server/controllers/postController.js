@@ -1,6 +1,8 @@
+// Load the post and user models for feed and profile actions.
 const Post = require('../models/post');
 const User = require('../models/user');
 
+// Create a regular post from the main feed.
 exports.createPost = async (req, res) => {
   const { content, postedBy, group } = req.body;
 
@@ -28,6 +30,7 @@ exports.createPost = async (req, res) => {
   }
 };
 
+// Return all posts in reverse chronological order.
 exports.getAllPosts = async (req, res) => {
   try {
     const posts = await Post.find({})
@@ -39,6 +42,7 @@ exports.getAllPosts = async (req, res) => {
   }
 };
 
+// Aggregate post counts by day for statistics views.
 exports.getPostStats = async (req, res) => {
   try {
     const stats = await Post.aggregate([
@@ -58,6 +62,7 @@ exports.getPostStats = async (req, res) => {
   }
 };
 
+// Toggle a like on a specific post.
 exports.likePost = async (req, res) => {
   const { userId } = req.body;
   try {
@@ -82,6 +87,7 @@ exports.likePost = async (req, res) => {
   }
 };
 
+// Add a comment to a post and return the updated thread.
 exports.commentOnPost = async (req, res) => {
   const { userId, text } = req.body;
   try {
@@ -101,6 +107,7 @@ exports.commentOnPost = async (req, res) => {
   }
 };
 
+// Update the content of a post owned by the current user.
 exports.updatePost = async (req, res) => {
   const { content, userId } = req.body;
   try {
@@ -121,6 +128,7 @@ exports.updatePost = async (req, res) => {
   }
 };
 
+// Remove a post when the owner or admin requests it.
 exports.deletePost = async (req, res) => {
   const { userId } = req.body;
   try {
@@ -142,6 +150,7 @@ exports.deletePost = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+// Create a post that belongs to a specific group.
 exports.createGroupPost = async (req, res) => {
   try {
     const { content, postedBy } = req.body;
@@ -172,6 +181,7 @@ exports.createGroupPost = async (req, res) => {
   }
 };
 
+// Build a personalized feed from followed users and joined groups.
 exports.getFeed = async (req, res) => {
   try {
     const me = await User.findById(req.params.userId);

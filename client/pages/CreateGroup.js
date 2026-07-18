@@ -1,8 +1,11 @@
 'use client';
+// Load the group creation dependencies.
 import { useState } from 'react';
 import axios from 'axios';
 
+// Render the group creation form for the dashboard.
 export default function CreateGroup({ userId, onGroupCreated }) {
+    // Keep the form fields and selected image in state.
     const [form, setForm] = useState({
         name: '',
         description: '',
@@ -12,6 +15,7 @@ export default function CreateGroup({ userId, onGroupCreated }) {
 
     const [selectedImage, setSelectedImage] = useState(null);
 
+    // Update the form values when the user types.
     const handleChange = (e) => {
         const { name, value, type, checked, files } = e.target;
         if (type === 'file') {
@@ -24,6 +28,7 @@ export default function CreateGroup({ userId, onGroupCreated }) {
         }
     };
 
+    // Submit the new group to the server.
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -57,6 +62,7 @@ export default function CreateGroup({ userId, onGroupCreated }) {
         }
     };
 
+    // Render the create-group form.
     return (
         <form onSubmit={handleSubmit} style={{ marginBottom: '20px' }}>
             <h2>Create Group</h2>

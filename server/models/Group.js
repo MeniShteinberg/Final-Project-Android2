@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+// Define the group schema for communities and their members.
 const groupSchema = new Schema({
   name: {
     type: String,

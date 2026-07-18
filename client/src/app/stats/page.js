@@ -1,12 +1,16 @@
 "use client";
 
+// Load the stats page dependencies.
 import React from "react";
 import PostStatsChart from '../../../pages/PostStatsChart.js';
 import { useRouter } from "next/navigation";
 
+// Render the stats page with the chart component and navigation.
 export default function StatsPage() {
+    // Track navigation back to the admin area.
     const router = useRouter();
 
+    // Render the statistics page layout.
     return (
         <div
             style={{

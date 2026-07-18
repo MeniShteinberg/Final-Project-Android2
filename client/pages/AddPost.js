@@ -1,12 +1,16 @@
 'use client';
+// Load the post composer dependencies.
 import { useState } from 'react';
 import axios from 'axios';
 import '../src/app/styles/AddPost.css';
 
 
+// Render the post composer for feed and group updates.
 export default function AddPost({ userId, groupId, onPostAdded }) {
+  // Keep the textarea and selected photo in local state.
   const [content, setContent] = useState('');
   const [photo, setPhoto] = useState(null);
+  // Submit the new post to the appropriate backend endpoint.
   const handlePost = async (e) => {
     e.preventDefault();
     try {
@@ -33,6 +37,7 @@ export default function AddPost({ userId, groupId, onPostAdded }) {
     }
   };
 
+  // Render the composer form and upload controls.
   return (
     <form onSubmit={handlePost} className="form">
       <textarea

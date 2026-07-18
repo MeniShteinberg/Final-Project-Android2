@@ -1,15 +1,19 @@
 'use client';
 
+// Load the chart dependencies and data state.
 import { useEffect, useState } from 'react';
 import {
     LineChart, Line, BarChart, Bar,
     XAxis, YAxis, Tooltip, CartesianGrid, ResponsiveContainer, Legend
 } from 'recharts';
 
+// Render the statistics charts for posts and users.
 export default function StatsPage() {
+    // Keep the chart data in local state.
     const [postStats, setPostStats] = useState([]);
     const [userStats, setUserStats] = useState([]);
 
+    // Load the post and user statistics on mount.
     useEffect(() => {
         fetch('http://localhost:5000/api/posts/stats')
             .then((res) => res.json())
@@ -22,6 +26,7 @@ export default function StatsPage() {
             .catch((err) => console.error('❌ Error fetching user stats:', err));
     }, []);
 
+    // Render the statistics charts.
     return (
         <div className="p-6 bg-white rounded-xl shadow-xl mt-6 max-w-5xl mx-auto space-y-12">
             <h1 className="text-3xl font-bold text-center mb-8">Statictes report</h1>

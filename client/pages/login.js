@@ -1,16 +1,20 @@
 'use client';
+// Load the login page dependencies.
 import { useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import GradientText from '../design/GradientText';
 import '../src/app/styles/loginPage.css';
 
+// Render the login form for the app.
 export default function LoginPage() {
+  // Keep the form fields and error state in local state.
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const router = useRouter();
 
+  // Submit user credentials to the authentication endpoint.
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
@@ -35,11 +39,13 @@ export default function LoginPage() {
     }
   };
 
+  // Clear stored auth data and return to the landing page.
   const handleLogout = () => {
     localStorage.removeItem("user"); 
     window.location.href = "/"; 
   };
 
+  // Render the login form UI.
   return (
     <div className="login-container">
       <form onSubmit={handleSubmit} className="login-form">

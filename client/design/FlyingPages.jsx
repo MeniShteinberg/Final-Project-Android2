@@ -1,13 +1,16 @@
 'use client';
 
+// Import the animation dependencies.
 import React, { useEffect, useRef } from 'react';
 import './FlyingPages.css';
 
 // Component for animated falling pages on screen edges
+// Render the animated page elements floating across the screen.
 const FlyingPages = ({ count = 6 }) => {
   // Store references to DOM elements
   const pageRefs = useRef([]);
 
+  // Create the animation state for each flying page.
   useEffect(() => {
     // Initialize pages assigned to either left or right sides
     const pagesData = Array.from({ length: count }).map(() => {
@@ -44,6 +47,7 @@ const FlyingPages = ({ count = 6 }) => {
     window.addEventListener('mousemove', handleMouseMove);
 
     // Main animation loop
+    // Update each page position on every frame.
     const animate = () => {
       pagesData.forEach((page, i) => {
         const dx = page.x - mouseX;
@@ -110,6 +114,7 @@ const FlyingPages = ({ count = 6 }) => {
     };
   }, [count]);
 
+  // Render the animated page container.
   return (
     <div className="flying-pages-container">
       {Array.from({ length: count }).map((_, i) => (

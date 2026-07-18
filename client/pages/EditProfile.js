@@ -1,9 +1,11 @@
+// Load the profile editing dependencies.
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import '../src/app/styles/loginPage.css';
 
 // Component for the profile edit page
+// Render the profile editor for the logged-in user.
 export default function EditProfilePage() {
   // Router instance for navigation
   const router = useRouter();
@@ -11,11 +13,13 @@ export default function EditProfilePage() {
   const [user, setUser] = useState(null);
   
   // Form input states
+  // Keep the editable form values in local state.
   const [name, setName] = useState('');
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
 
+  // Load the current user data when the page opens.
   useEffect(() => {
     // Retrieve user data from local storage
     const storedUser = JSON.parse(localStorage.getItem('user'));
@@ -33,6 +37,7 @@ export default function EditProfilePage() {
   }, [router]);
 
   // Handle form submission
+  // Send the updated profile information to the server.
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage('');
@@ -67,8 +72,10 @@ export default function EditProfilePage() {
   };
 
   // Show loading state while retrieving user
+  // Display a loader until the profile data is ready.
   if (!user) return <p>Loading...</p>;
 
+  // Render the profile form UI.
   return (
     <div className="login-container">
       <form onSubmit={handleSubmit} className="login-form">

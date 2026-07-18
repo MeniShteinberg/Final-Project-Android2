@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+// Define the social post document and its nested comments.
 const postSchema = new mongoose.Schema(
   {
     content: {

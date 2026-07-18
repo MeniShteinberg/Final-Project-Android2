@@ -1,4 +1,5 @@
 'use client';
+// Load the dashboard dependencies and UI pieces.
 import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import AddPost from './AddPost.js';
@@ -9,6 +10,7 @@ import Dock from "../design/Dock";
 import CreateGroup from './CreateGroup';
 import GroupSidebar from './GroupSidebar';
 
+// Render the main dashboard experience for the signed-in user.
 export default function Dashboard() {
   const router = useRouter();
   const [user, setUser] = useState(null);
@@ -19,6 +21,7 @@ export default function Dashboard() {
   const [sortByNameAsc, setSortByNameAsc] = useState(true);
   const [sortByLengthAsc, setSortByLengthAsc] = useState(true);
 
+  // Load the current user and their social data on mount.
   useEffect(() => {
     const userData = localStorage.getItem('user');
     if (userData) {
@@ -27,6 +30,7 @@ export default function Dashboard() {
     }
   }, []);
 
+  // Fetch the full user record and hydrate the dashboard state.
   const fetchFullUser = async (userId) => {
     try {
       const { data } = await axios.get(`http://localhost:5000/api/users/${userId}`);
@@ -40,6 +44,7 @@ export default function Dashboard() {
     }
   };
 
+  // Load the current user's feed posts from the backend.
   const fetchFeed = async (userId) => {
     try {
       const { data } = await axios.get(`http://localhost:5000/api/feed/${userId}`);
@@ -49,6 +54,7 @@ export default function Dashboard() {
     }
   };
 
+  // Gather users that are not yet followed by the current user.
   const fetchUsers = async (currentUser) => {
     try {
       const { data } = await axios.get(`http://localhost:5000/api/users`);
@@ -66,6 +72,7 @@ export default function Dashboard() {
     }
   };
 
+  // Follow a selected user and refresh the dashboard.
   const handleFollow = async (friendUsername) => {
     try {
       await axios.post('http://localhost:5000/api/users/add-friend', {
@@ -82,12 +89,14 @@ export default function Dashboard() {
     }
   };
 
+  // Update a post locally after an edit response arrives.
   const updatePost = (updatedPost) => {
     setPosts((prev) =>
       prev.map((p) => (p._id === updatedPost._id ? updatedPost : p))
     );
   };
 
+  // Toggle the active sorting criteria for the user list.
   const toggleSort = (criterion) => {
     setActiveSorts((prev) =>
       prev.includes(criterion)
@@ -126,8 +135,10 @@ export default function Dashboard() {
       return 0;
     });
 
+  // Show a loader until the authenticated user is ready.
   if (!user) return <p>Loading...</p>;
 
+  // Build the dock navigation items for the dashboard shell.
   const items = [
     {
       icon: <img src="/images/home.png" alt="Home" style={{ width: 30, height: 30 }} />,
@@ -149,6 +160,7 @@ export default function Dashboard() {
     },
   ];
 
+  // Render the dashboard layout and feed experience.
   return (
     <>
       <div style={{ position: "fixed", top: 0, width: "100%", zIndex: 1000 }}>

@@ -1,7 +1,8 @@
+// Load the password hashing library and user model.
 const bcrypt = require('bcrypt');
 const User = require('../models/user');
 
-
+// Create a new account with a hashed password and optional photo.
 exports.registerUser = async (req, res) => {
   try {
     const { name, username, email, password } = req.body;
@@ -43,7 +44,7 @@ exports.registerUser = async (req, res) => {
   }
 };
 
-
+// Validate login credentials and return the signed-in user.
 exports.loginUser = async (req, res) => {
   const { email, password } = req.body;
 

@@ -1,3 +1,4 @@
+/* Style the outer dock wrapper and layout. */
 .dock-outer {
   margin: 0 0.5rem;
   display: flex;
@@ -5,6 +6,7 @@
   align-items: center;
 }
 
+/* Style the floating dock panel. */
 .dock-panel {
   position: absolute;
   bottom: 0.5rem;
@@ -20,6 +22,7 @@
   padding: 0 0.5rem 0.5rem;
 }
 
+/* Style each dock item button. */
 .dock-item {
   position: relative;
   display: inline-flex;
@@ -35,12 +38,14 @@
   : none;
 }
 
+/* Center the dock icon content. */
 .dock-icon {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
+/* Style the hover label shown above a dock item. */
 .dock-label {
   position: absolute;
   top: -1.5rem;

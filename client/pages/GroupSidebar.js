@@ -1,19 +1,24 @@
 'use client';
+// Load the group sidebar dependencies.
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Link from 'next/link';
 import '../src/app/styles/GroupSidebar.css';
 
+// Render a searchable sidebar for discovering and joining groups.
 export default function GroupSidebar({ userId }) {
+    // Keep the groups list and search state in local state.
     const [groups, setGroups] = useState([]);
     const [myGroupIds, setMyGroupIds] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
 
+    // Load the available groups and the current user's memberships on mount.
     useEffect(() => {
         fetchAllGroups();
         fetchMyGroups();
     }, []);
 
+    // Fetch the current user's joined groups.
     const fetchMyGroups = async () => {
         try {
             const { data } = await axios.get(`http://localhost:5000/api/groups/user/${userId}`);
@@ -23,6 +28,7 @@ export default function GroupSidebar({ userId }) {
         }
     };
 
+    // Fetch all groups available for discovery.
     const fetchAllGroups = async () => {
         try {
             const { data } = await axios.get('http://localhost:5000/api/groups');
@@ -32,6 +38,7 @@ export default function GroupSidebar({ userId }) {
         }
     };
 
+    // Toggle follow state for a selected group.
     const handleFollowToggle = async (groupId) => {
         const isFollowing = myGroupIds.includes(groupId);
         try {

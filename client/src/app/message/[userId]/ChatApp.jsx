@@ -1,5 +1,6 @@
 'use client';
 
+// Load the chat dependencies and socket client.
 import { useState, useEffect, useRef } from 'react';
 import { useParams } from 'next/navigation';
 import { io } from 'socket.io-client';
@@ -11,7 +12,9 @@ const socket = io('http://localhost:5000', {
   transports: ['websocket'],
 });
 
+// Render the real-time chat interface for two users.
 export default function ChatApp() {
+  // Keep the local user, chat messages, and input state.
   const { userId } = useParams();
   const [me, setMe] = useState(null);
   const [messages, setMessages] = useState([]);
@@ -35,6 +38,7 @@ export default function ChatApp() {
     return () => socket.off('chat message');
   }, [userId]);
 
+  // Load the conversation history for the selected user.
   useEffect(() => {
     if (me && userId) {
       axios
@@ -44,12 +48,14 @@ export default function ChatApp() {
     }
   }, [me, userId]);
 
+  // Scroll the chat view to the newest message.
   useEffect(() => {
     if (messagesContainerRef.current) {
       messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight;
     }
   }, [messages]);
 
+  // Load the recipient profile details for the header.
   useEffect(() => {
     if (userId) {
       axios
@@ -61,6 +67,7 @@ export default function ChatApp() {
     }
   }, [userId]);
 
+  // Send a chat message through the socket connection.
   const sendMessage = async () => {
     if (!input.trim() || !me?._id) return;
 
@@ -78,6 +85,7 @@ export default function ChatApp() {
     }
   };
 
+  // Render the chat page and message list.
   return (
     <div className="chat-page" style={{ position: 'relative', overflow: 'hidden' }}>
       

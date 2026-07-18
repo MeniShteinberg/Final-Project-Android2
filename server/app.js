@@ -1,4 +1,5 @@
 require('dotenv').config();
+// Load the core server dependencies.
 const express = require('express');
 const http = require('http');
 const mongoose = require('mongoose');
@@ -12,7 +13,7 @@ const cloudinary = require('cloudinary').v2;
 // Initialize Express app
 const app = express();
 
-// Setup global middlewares
+// Enable shared request handling and JSON parsing.
 app.use(cors());
 app.use(bodyParser.json());
 
@@ -38,6 +39,7 @@ const groupRoutes = require('./routes/group');
 const feedRoutes = require('./routes/feed');
 
 // Register API routes
+// Attach the main REST endpoints to the app.
 app.use('/api/users', userRoutes); 
 app.use('/api/posts', postRoutes);
 app.use('/api/auth', authRoutes);
@@ -47,6 +49,7 @@ app.use('/api/groups', groupRoutes);
 app.use('/api/feed', feedRoutes);
 
 // Custom registration route from local changes
+// Handle user signup with uploaded profile photos.
 app.post('/api/users/register', upload.single('photo'), async (req, res) => {
   try {
     const { name, username, email, password } = req.body;
@@ -89,6 +92,7 @@ app.post('/api/users/register', upload.single('photo'), async (req, res) => {
 });
 
 // Create HTTP server and initialize WebSockets (Socket.io)
+// Start the HTTP server and socket layer together.
 const server = http.createServer(app);
 const io = new Server(server, {
   cors: {
@@ -97,6 +101,7 @@ const io = new Server(server, {
 });
 
 // Handle WebSocket connections and real-time events
+// Listen for client connections and chat events.
 io.on('connection', (socket) => {
   console.log('🟢 A user connected');
 
@@ -113,6 +118,7 @@ io.on('connection', (socket) => {
 });
 
 // Connect to MongoDB and start the server
+// Connect the database before accepting traffic.
 mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,

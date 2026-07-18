@@ -1,6 +1,8 @@
+// Load the models needed to build statistics reports.
 const Post = require('../models/post');
 const User = require('../models/user');
 
+// Aggregate post counts by day for the charts.
 exports.getPostStats = async (req, res) => {
   try {
     const stats = await Post.aggregate([
@@ -25,6 +27,7 @@ exports.getPostStats = async (req, res) => {
   }
 };
 
+// Aggregate user registrations over the recent period.
 exports.getUserStats = async (req, res) => {
   const oneMonthAgo = new Date();
   oneMonthAgo.setMonth(oneMonthAgo.getMonth() - 1);

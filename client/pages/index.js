@@ -1,11 +1,15 @@
 'use client';
+// Load the home page dependencies.
 import { useRouter } from 'next/router';
 import TypewriterText from '../design/TypewriterText';
 import '../src/app/styles/index.css'; 
 
+// Render the landing page for the social app.
 export default function Home() {
+  // Track navigation for the landing page actions.
   const router = useRouter();
 
+  // Render the landing page UI.
   return (
     <div className="home-container">
       <TypewriterText

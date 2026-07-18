@@ -1,7 +1,8 @@
+// Load the group and user models for community management.
 const Group = require('../models/group');
 const User = require('../models/user');
 
-
+// Create a new group with the creator as the first member and admin.
 exports.createGroup = async (req, res) => {
     try {
         const { name, description, category, isPrivate, userId } = req.body;
@@ -32,6 +33,7 @@ exports.createGroup = async (req, res) => {
 
 
 
+// Return all groups for discovery and browsing.
 exports.getAllGroups = async (req, res) => {
     try {
         const groups = await Group.find({});
@@ -41,6 +43,7 @@ exports.getAllGroups = async (req, res) => {
     }
 };
 
+// Remove a user from a group's member list.
 exports.unfollowGroup = async (req, res) => {
     const { groupId } = req.params;
     const { userId } = req.body;
@@ -59,6 +62,7 @@ exports.unfollowGroup = async (req, res) => {
 };
 
 
+// Add a user to a group when they follow it.
 exports.followGroup = async (req, res) => {
     try {
         const { groupId } = req.params;
@@ -78,6 +82,7 @@ exports.followGroup = async (req, res) => {
     }
 };
 
+// Return the groups that a specific user joined.
 exports.getUserGroups = async (req, res) => {
     try {
         const { userId } = req.params;

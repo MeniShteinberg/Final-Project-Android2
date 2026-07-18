@@ -1,11 +1,14 @@
 'use client';
+// Load the registration page dependencies.
 import { useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import GradientText from '../design/GradientText';
 import '../src/app/styles/RegisterPage.css';
 
+// Render the registration form for new users.
 export default function RegisterPage() {
+  // Keep the form values and error state in local state.
   const [userInfo, setUserInfo] = useState({
     name: '',
     username: '',
@@ -16,6 +19,7 @@ export default function RegisterPage() {
   const [error, setError] = useState('');
   const router = useRouter();
 
+  // Update the registration form when the user types.
   const handleChange = (e) => {
     const { name, value, files } = e.target;
     if (name === 'photo') {
@@ -25,6 +29,7 @@ export default function RegisterPage() {
     }
   };
 
+  // Submit the registration payload to the backend.
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
@@ -51,11 +56,13 @@ export default function RegisterPage() {
     }
   };
 
+  // Clear stored auth data and return home.
   const handleLogout = () => {
     localStorage.removeItem("user"); 
     window.location.href = "/"; 
   };
 
+  // Render the registration form UI.
   return (
     <div className="register-container">
       <form onSubmit={handleSubmit} className="register-form">

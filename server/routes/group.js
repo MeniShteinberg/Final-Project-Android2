@@ -1,3 +1,4 @@
+// Load the group routes and supporting controllers.
 const express = require('express');
 const router = express.Router();
 const groupController = require('../controllers/groupController');
@@ -6,14 +7,17 @@ const { upload } = require('../utils/cloudinary');
 const Group = require('../models/group');
 const Post = require('../models/post');
 
+// Create a new group with an optional uploaded photo.
 router.post('/create', upload.single('photo'), groupController.createGroup);
 
+// Return the group catalog and user group memberships.
 router.get('/', groupController.getAllGroups);
 router.post('/:groupId/follow', groupController.followGroup);
 
 router.get('/user/:userId', groupController.getUserGroups);
 
 
+// Fetch a single group's details by id.
 router.get('/:groupId', async (req, res) => {
     try {
         const group = await Group.findById(req.params.groupId);
@@ -25,6 +29,7 @@ router.get('/:groupId', async (req, res) => {
 });
 
 
+// Fetch the posts that belong to a specific group.
 router.get('/:groupId/posts', async (req, res) => {
     try {
         const posts = await Post.find({ group: req.params.groupId })
@@ -37,6 +42,7 @@ router.get('/:groupId/posts', async (req, res) => {
     }
 });
 
+// Create a new post inside a specific group.
 router.post('/:groupId/post', upload.single('photo'), postController.createGroupPost);
 
 router.post('/:groupId/unfollow', groupController.unfollowGroup);

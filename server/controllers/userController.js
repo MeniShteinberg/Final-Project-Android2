@@ -1,7 +1,9 @@
+// Load the user, post, and hashing dependencies.
 const Post = require('../models/post');
 const User = require('../models/user');
 const bcrypt = require('bcrypt');
 
+// Validate login credentials and return the signed-in user.
 exports.loginUser = async (req, res) => {
   const { email, password } = req.body;
   try {
@@ -26,6 +28,7 @@ exports.loginUser = async (req, res) => {
   }
 };
 
+// Build a simple daily user-registration statistics report.
 exports.getUserStats = async (req, res) => {
   try {
     const users = await User.find({});
@@ -46,6 +49,7 @@ exports.getUserStats = async (req, res) => {
   }
 };
 
+// Create a new user account with a hashed password.
 exports.registerUser = async (req, res) => {
   try {
     const { name, username, email, password } = req.body;
@@ -87,6 +91,7 @@ exports.registerUser = async (req, res) => {
   }
 };
 
+// Return the list of all users for the discovery UI.
 exports.getAllUsers = async (req, res) => {
   try {
     const users = await User.find({}, 'username name _id photo followers');
@@ -96,6 +101,7 @@ exports.getAllUsers = async (req, res) => {
   }
 };
 
+// Return a specific user's public profile information.
 exports.getUserById = async (req, res) => {
   try {
     const user = await User.findById(req.params.userId)
@@ -110,6 +116,7 @@ exports.getUserById = async (req, res) => {
   }
 };
 
+// Return a user profile with follower counts and their posts.
 exports.getUserProfile = async (req, res) => {
   try {
     const user = await User.findById(req.params.userId).select('name username photo followers following');
@@ -131,6 +138,7 @@ exports.getUserProfile = async (req, res) => {
   }
 };
 
+// Follow another user and update both follower lists.
 exports.addFriend = async (req, res) => {
   const { myId, friendUsername } = req.body;
   try {
@@ -153,6 +161,7 @@ exports.addFriend = async (req, res) => {
   }
 };
 
+// Unfollow a user and remove the relationship from both accounts.
 exports.removeFriend = async (req, res) => {
   const { myId, friendId } = req.body;
   try {
@@ -171,6 +180,7 @@ exports.removeFriend = async (req, res) => {
   }
 };
 
+// Handle the admin CRUD operations for users.
 exports.userCrudHandler = async (req, res) => {
   const { command, data } = req.body;
   try {

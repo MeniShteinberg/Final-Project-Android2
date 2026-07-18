@@ -1,10 +1,13 @@
 "use client";
+// Load the admin dashboard dependencies.
 import { useState, useEffect } from "react";
 import axios from "axios";
 import PostCard from './PostCard';
 import PostStatsChart from './PostStatsChart';
 
+// Render the admin management dashboard for users and posts.
 export default function AdminFunc() {
+  // Keep the form and data state for user and post management.
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -17,6 +20,7 @@ export default function AdminFunc() {
   const [currentUser, setCurrentUser] = useState(null);
   const [loadingUser, setLoadingUser] = useState(true);
 
+  // Load the current user and refresh admin data on mount.
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     if (storedUser) setCurrentUser(JSON.parse(storedUser));
@@ -25,11 +29,13 @@ export default function AdminFunc() {
     fetchPosts();
   }, []);
 
+  // Clear saved auth data and redirect to the landing page.
   const handleLogout = () => {
     localStorage.removeItem("user"); 
     window.location.href = "/"; 
   };
 
+  // Load the user list from the backend.
   const fetchUsers = async () => {
     try {
       const response = await axios.post("http://localhost:5000/api/users", {
@@ -43,6 +49,7 @@ export default function AdminFunc() {
     }
   };
 
+  // Load the post list for admin moderation.
   const fetchPosts = async () => {
     try {
       const response = await axios.get("http://localhost:5000/api/posts/all");
@@ -52,6 +59,7 @@ export default function AdminFunc() {
     }
   };
 
+  // Delete a post through the admin API.
   const deletePost = async (postId) => {
     try {
       if (!currentUser?._id) {
@@ -70,6 +78,7 @@ export default function AdminFunc() {
     }
   };
 
+  // Send CRUD commands to the user API.
   const handleCommand = async (command, extraData = {}) => {
     try {
       if (command === "update" && newEmail && !isValidEmail(newEmail)) {
@@ -95,6 +104,7 @@ export default function AdminFunc() {
     }
   };
 
+  // Prepare a selected user for editing.
   const handleEdit = (user) => {
     setUserId(user._id);
     setName(user.name);
@@ -115,6 +125,7 @@ export default function AdminFunc() {
 
   const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
+  // Render the admin management UI.
   return (
     <div
       className="min-h-screen bg-cover bg-center bg-no-repeat"

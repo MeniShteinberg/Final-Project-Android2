@@ -1,6 +1,7 @@
+// Load the message model for direct conversations.
 const Message = require('../models/message');
 
-
+// Save a new message to the conversation history.
 exports.sendMessage = async (req, res) => {
   const { sender, receiver, text } = req.body;
 
@@ -19,6 +20,7 @@ exports.sendMessage = async (req, res) => {
 };
 
 
+// Retrieve the chat history between two users.
 exports.getConversation = async (req, res) => {
   const { user1, user2 } = req.params;
 

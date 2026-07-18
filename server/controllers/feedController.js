@@ -1,7 +1,9 @@
 
+// Load the post and user models for feed generation.
 const Post = require('../models/post');
 const User = require('../models/user');
 
+// Build a personalized feed from the user's followed accounts.
 exports.getUserFeed = async (req, res) => {
   try {
     const userId = req.params.userId;

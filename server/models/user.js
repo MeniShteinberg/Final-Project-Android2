@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+// Define the user document structure and relationships.
 const userSchema = new mongoose.Schema(
   {
     name: {

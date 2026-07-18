@@ -1,3 +1,4 @@
+/* Style the animated gradient text wrapper. */
 .animated-gradient-text {
   position: relative;
   margin: 0 auto;
@@ -14,6 +15,7 @@
   cursor: pointer;
 }
 
+/* Style the animated gradient overlay layer. */
 .gradient-overlay {
   position: absolute;
   top: 0;
@@ -56,6 +58,7 @@
   }
 }
 
+/* Style the visible text content with the gradient effect. */
 .text-content {
   display: inline-block;
   position: relative;

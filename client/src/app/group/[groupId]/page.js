@@ -1,4 +1,5 @@
 'use client';
+// Load the group page dependencies.
 import { useParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -7,7 +8,9 @@ import PostCard from '../../../../pages/PostCard';
 
 import '../../styles/group.css';
 
+// Render the group detail page and its posts.
 export default function GroupPage() {
+    // Keep the current group and user state in local state.
     const { groupId } = useParams();
     const [group, setGroup] = useState(null);
     const [posts, setPosts] = useState([]);
@@ -27,6 +30,7 @@ export default function GroupPage() {
         }
     }, [groupId]);
 
+    // Fetch the group details from the backend.
     const fetchGroupData = async () => {
         try {
             const { data } = await axios.get(`http://localhost:5000/api/groups/${groupId}`);
@@ -36,6 +40,7 @@ export default function GroupPage() {
         }
     };
 
+    // Fetch the posts belonging to the current group.
     const fetchGroupPosts = async () => {
         try {
             const { data } = await axios.get(`http://localhost:5000/api/groups/${groupId}/posts`);
@@ -45,11 +50,13 @@ export default function GroupPage() {
         }
     };
 
+    // Update a post locally after an edit response arrives.
     const updatePost = (updated) => {
         setPosts((prev) => prev.map((p) => (p._id === updated._id ? updated : p)));
     };
 
 
+    // Join the current group and refresh its member list.
     const handleJoinGroup = async () => {
         try {
             await axios.post(`http://localhost:5000/api/groups/${group._id}/follow`, {
@@ -69,6 +76,7 @@ export default function GroupPage() {
 
     const isMember = group.members.includes(user?._id);
 
+    // Render the group page layout and post feed.
     return (
         <div className="group-container">
             <div className="group-header">

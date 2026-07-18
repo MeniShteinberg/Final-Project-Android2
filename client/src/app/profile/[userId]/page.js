@@ -1,18 +1,23 @@
 'use client';
 
+// Load the profile page dependencies.
 import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import axios from 'axios';
 import PostCard from '../../../../pages/PostCard';
 import '../../styles/stylesforpage.css';
 
+// Render the user profile page with posts and profile details.
 export default function ProfilePage() {
+  // Track navigation and the current profile context.
   const router = useRouter();
   const params = useParams();
   const userId = params.userId;
+  // Keep the profile data and current user id in state.
   const [profileData, setProfileData] = useState(null);
   const [currentUserId, setCurrentUserId] = useState(null);
 
+  // Load the selected profile and the logged-in user on mount.
   useEffect(() => {
     const fetchProfile = async () => {
       try {
@@ -32,12 +37,14 @@ export default function ProfilePage() {
     if (userId) fetchProfile();
   }, [userId]);
 
+  // Show a loading message until the profile data is available.
   if (!profileData) {
     return <div className="profile-loading">Loading Profile please wait.....</div>;
   }
 
   const { user, followersCount, followingCount, posts } = profileData;
 
+  // Render the profile header, stats, and posts.
   return (
     <div className="profile-container">
       <div className="top-bar">
